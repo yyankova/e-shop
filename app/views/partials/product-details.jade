@@ -1,0 +1,5 @@
+.container
+    h2 {{ product.name }}
+    p {{ product.price}}
+    ul
+        li(ng-repeat="category in product.categories") {{ category.description }}
