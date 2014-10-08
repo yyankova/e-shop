@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
     user = require('../models/User'),
-    //category = require('../models/Category'),
+//category = require('../models/Category'),
     product = require('../models/Product'),
     purchase = require('../models/Purchase'),
     review = require('../models/Review');
