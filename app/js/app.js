@@ -14,17 +14,16 @@ app.config(function($routeProvider, $locationProvider) {
             }
         }
     };
-
     $routeProvider
         .when('/', {
             templateUrl: '/partials/home',
             controller: 'MainCtrl'
         })
-        .when('/courses', {
+        .when('/products', {
             templateUrl: '/partials/products-list',
             controller: 'ProductsListCtrl'
         })
-        .when('/courses/:id', {
+        .when('/products/:id', {
             templateUrl: '/partials/product-details',
             controller: 'ProductDetailsCtrl'
         })
