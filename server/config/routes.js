@@ -7,12 +7,13 @@ module.exports = function (app){
     app.get('/api/users', auth.isInRole('admin'), controllers.users.getAllUsers);
     app.post('/api/users', controllers.users.createUser);
     app.put('/api/users', auth.isAuthenticated, controllers.users.updateUser);
+    app.put('/api/users:id', controllers.users.deleteUser);
 
     //products
     app.get('/api/products', controllers.products.getAllProducts);
     app.get('/api/products/:id', controllers.products.getDetails);
-    //app.post('/api/products', auth.isInRole('admin'), controllers.products.createProduct);
-    app.post('/api/products', controllers.products.createProduct);
+    app.post('/api/products', auth.isInRole('admin'), controllers.products.createProduct);
+    //app.post('/api/products', controllers.products.createProduct);
     app.post('/api/products/:id', auth.isAuthenticated, controllers.purchases.createPurchase);
 
     //categories

@@ -9,7 +9,8 @@ var userSchema = mongoose.Schema({
     hashPass: String,
     roles: [String],
     addresses: [{type: String, required: true}],
-    phoneNumbers: [{type: String, required: true}]
+    phoneNumbers: [{type: String, required: true}],
+    isDeleted: [{type: Boolean, default: false}]
 });
 
 userSchema.method({
