@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('purchasesData', ['$http', '$q', 'authorization', function tripsData($http, $q, authorization) {
+app.factory('purchasesData', ['$http', '$q', function tripsData($http, $q, authorization) {
     //TODO: fix baseServiceUrl
     var baseServiceUrl = 'http://localhost:1235';
     var purchasesApi = baseServiceUrl + '/api/purchases'
@@ -24,7 +24,6 @@ app.factory('purchasesData', ['$http', '$q', 'authorization', function tripsData
 
             var deferred = $q.defer();
             $http.get(purchasesApi,{
-                headers: authorization.getAuthorizationHeader(),
                 params: params})
                 .success(function(data) {
                     deferred.resolve(data);

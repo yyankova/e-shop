@@ -81,7 +81,7 @@ module.exports = {
     },
     getDetails: function(req, res){
         var id = req.params.id;
-        Purchase.findOne({_id: req.params.id}).exec(function(req, obj){
+        Purchase.findOne({_id: req.params.id}).exec(function(err, obj){
             if (err) {
                 console.log('Error while getting purchase: ' + err);
                 res.json(err);

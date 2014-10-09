@@ -1,3 +1,20 @@
-//
-   Created by User on 10/9/2014.
+// TODO
+//product, purchase date, paid, payment method, payment details, ship date, shipped, product picture
 
+.row(ng-show="{{purchase.shipped}}")
+    button.btn.btn-primary('ng-click="leaveReview()"') Leave Review
+table.table
+    tr
+        th
+            | Product
+        th
+            | Purchase Date
+        th
+            | Payment method
+    tr
+        td
+            | {{ purchase.product }}
+        td
+            | {{ purchase.purchaseDate | date: 'dd/MM/yyyy' }}
+        td
+            | {{ purchase.paymentMethod }}
