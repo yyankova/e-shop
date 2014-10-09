@@ -14,9 +14,12 @@
     br
     table.table
         tr
+            th Image
             th Name
             th Price
         tr(ng-repeat="product in products | filter: search | orderBy: sort")
+            td
+                img(ng-src="/images/{{product.picture}}")
             td
                 a(href="#/products/{{ product._id }}") {{ product.name }}
             td {{ product.price }}

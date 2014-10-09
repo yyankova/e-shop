@@ -4,7 +4,7 @@ app.factory('cachedProducts', function(ProductsData) {
     return {
         query: function() {
             if (!cachedProducts) {
-                cachedProducts = ProductsData.query();
+                cachedProducts = ProductsData.ProductsData.query();
             }
 
             return cachedProducts;
