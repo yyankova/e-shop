@@ -1,6 +1,5 @@
 var Purchase = require('mongoose').model('Purchase');
 //TODO: only admin role to can: module.exports.update()
-//TODO: add validation to payment details
 
 function isComposedOfDigits(cardNumber){
     var isnum = /^\d+$/.test(cardNumber);
@@ -13,26 +12,26 @@ function validateCreditCard(cardNumber, securityCode){
         isComposedOfDigits(cardNumber);
 }
 
-function validatePaymentDetails(formBody){
+function validatePaymentOrder(orderNumber){
+    return true;
+}
+
+function validatePaymentDetails(formBody, res){
     var paymentMethod = formBody.paymentMethod;
     if(paymentMethod === 'creditCard'){
         var valid = validateCreditCard(formBody.cardNumber, formBody.securityCode);
         if(!valid){
-            throw {message: 'Invalid card number and/or security code!'};
+            res.json({message: 'Invalid card number and/or security code!'});
         }
     } else if (paymentMethod === 'paymentOrder') {
-        return {
-            code: formBody.paymentOrderNumber
-        };
-    } else {
-        // cash on delivery
-        return {
-
-        };
+        var valid = validatePaymentOrder(formBody.paymentOrderNumber);
+        if(!valid){
+            res.json({message: 'Invalid payment order number!'});
+        }
     }
 }
 
-function paymentDetails(formBody){
+function getPaymentDetails(formBody){
     var paymentMethod = formBody.paymentMethod;
     if(paymentMethod === 'creditCard'){
         return {
@@ -45,7 +44,6 @@ function paymentDetails(formBody){
     } else {
         // cash on delivery
         return {
-
         };
     }
 };
@@ -56,7 +54,7 @@ module.exports = {
         newPurchaseData.purchaseDate = new Date();
         newPurchaseData.paid = false;
         newPurchaseData.shipped = false;
-        validatePaymentDetails(req.body);
+        validatePaymentDetails(req.body, res);
         newPurchaseData.paymentDetails = getPaymentDetails(req.body);
         Purchase.create(newPurchaseData, function(err, purchase) {
             if (err) {
@@ -69,7 +67,7 @@ module.exports = {
         });
     },
     getAllPurchasesForUser: function(req, res) {
-        // /api/user/purchases
+        // /api/users/:id/purchases
         var username = req.user.username;
         Purchase.find({user : username}).exec(function(err, collection) {
             if (err) {
