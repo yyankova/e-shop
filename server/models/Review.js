@@ -20,8 +20,8 @@ module.exports.seed = function() {
         }
 
         if (collection.length === 0) {
-            Review.create({user: 'user 1', text: 'KLKLKLKLKLKLKLKLKLK'});
-            Review.create({user: 'user 2', text: 'irogjklfbghiuosdkl'});
+            Review.create({user: 'user', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit rhoncus enim et tincidunt. Aenean nunc libero, sollicitudin sit amet mauris mattis, cursus pulvinar mi.'});
+            Review.create({user: 'user', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit rhoncus enim et tincidunt. Aenean nunc libero, sollicitudin sit amet mauris mattis, cursus pulvinar mi. Phasellus sit amet elit porta, porta urna id, vulputate leo. Sed a orci dolor. Praesent placerat finibus dolor.'});
             console.log('Reviews seeded.');
         }
     });

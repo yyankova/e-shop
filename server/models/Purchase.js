@@ -26,7 +26,7 @@ module.exports.seed = function() {
         if (collection.length === 0) {
             Purchase.create({
                 product: 'Jeans',
-                user: 'me',
+                user: 'user',
                 purchaseDate: new Date(),
                 paid: false,
                 paymentMethod: 'creditCard',
@@ -36,7 +36,7 @@ module.exports.seed = function() {
             });
             Purchase.create({
                 product: 'Sweater',
-                user: 'me',
+                user: 'user',
                 purchaseDate: new Date(),
                 paid: true,
                 paymentMethod: 'paymentOrder',

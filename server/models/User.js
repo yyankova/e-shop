@@ -37,14 +37,14 @@ module.exports.seed = function() {
             var hashedPwd;
 
             salt = encryption.generateSalt();
-            hashedPwd = encryption.generateHashedPassword(salt, 'Ivaylo');
-            User.create({username: 'ivaylo.kenov', firstName: 'Ivaylo', lastName: 'Kenov', salt: salt, hashPass: hashedPwd, roles: ['admin']});
+            hashedPwd = encryption.generateHashedPassword(salt, '123');
+            User.create({username: 'admin1', firstName: 'Admin', lastName: 'First', salt: salt, hashPass: hashedPwd, roles: ['admin']});
             salt = encryption.generateSalt();
-            hashedPwd = encryption.generateHashedPassword(salt, 'Nikolay');
-            User.create({username: 'Nikolay.IT', firstName: 'Nikolay', lastName: 'Kostov', salt: salt, hashPass: hashedPwd, roles: ['standard']});
+            hashedPwd = encryption.generateHashedPassword(salt, '123');
+            User.create({username: 'admin2', firstName: 'Admin', lastName: 'Second', salt: salt, hashPass: hashedPwd, roles: ['admin']});
             salt = encryption.generateSalt();
-            hashedPwd = encryption.generateHashedPassword(salt, 'Doncho');
-            User.create({username: 'Doncho', firstName: 'Doncho', lastName: 'Minkov', salt: salt, hashPass: hashedPwd});
+            hashedPwd = encryption.generateHashedPassword(salt, '123');
+            User.create({username: 'user', firstName: 'User', lastName: 'First', salt: salt, hashPass: hashedPwd});
             console.log('Users seeded.');
         }
     });

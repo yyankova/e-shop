@@ -20,11 +20,55 @@ module.exports.seed = function() {
         }
 
         if (collection.length === 0) {
-            Product.create({name: 'Product 1', description: 'Description some description', price: 10.3, count: 10, categories: ['category 1', 'category 2']});
-            Product.create({name: 'Product 2', description: 'Description some description', price: 10.3, count: 10, categories: ['category 1', 'category 3']});
-            Product.create({name: 'Product 3', description: 'Description some description', price: 10.7, count: 10, categories: ['category 1']});
-            Product.create({name: 'Product 4', description: 'Description some description', price: 10.9, count: 10, categories: ['category 1', 'category 3']});
-            Product.create({name: 'Product 5', description: 'None', price: 10.3, count: 10, categories: ['category 1']});
+            Product.create({
+                picture: '',
+                name: 'Black and white blazer',
+                description: 'Description some description',
+                price: 10.3,
+                count: 10,
+                categories: ['casual', 'sport']
+            }).then(function(product){
+                product.picture = __dirname + '/../../app/images/' + product._id + '.jpeg';
+            });
+            Product.create({
+                picture: '',
+                name: 'Skinny Jeans',
+                description: 'Description some description',
+                price: 10.3, count: 10,
+                categories: ['winter', 'sport']
+            }).then(function(product){
+                product.picture = __dirname + '/../../app/images/' + product._id + '.jpeg';
+            });
+            Product.create({
+                picture: '',
+                name: 'Ripped Jeans',
+                description: 'Description some description',
+                price: 10.7,
+                count: 10,
+                categories: ['summer', 'basic']
+            }).then(function(product){
+                product.picture = __dirname + '/../../app/images/' + product._id + '.jpeg';
+            });
+            Product.create({
+                picture: '',
+                name: 'White skirt',
+                description: 'Description some description',
+                price: 10.9,
+                count: 10,
+                categories: ['basic', 'casual']
+            }).then(function(product){
+                product.picture = __dirname + '/../../app/images/' + product._id + '.jpeg';
+            });
+            Product.create({
+                picture: '',
+                name: 'Skinny trousers',
+                description: 'None',
+                price: 10.3,
+                count: 10,
+                categories: ['winter']
+            }).then(function(product){
+                product.picture = __dirname + '/../../app/images/' + product._id + '.jpeg';
+            });
             console.log('Products seeded.');
         }
     });
