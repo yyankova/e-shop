@@ -26,8 +26,8 @@ module.exports = {
             Product.create({
                     name: productToAdd.name,
                     description: productToAdd.description,
-                    price: productToAdd.price || 0,
-                    count: productToAdd.count || 0,
+                    price: productToAdd.price * 1,
+                    count: productToAdd.count * 1,
                     categories: productToAdd.categories},
                 function (err, addedProduct) {
                     if (err) {
