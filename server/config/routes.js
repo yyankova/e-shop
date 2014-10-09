@@ -11,7 +11,8 @@ module.exports = function (app){
     //products
     app.get('/api/products', controllers.products.getAllProducts);
     app.get('/api/products/:id', controllers.products.getDetails);
-    app.post('/api/products', auth.isInRole('admin'), controllers.products.createProduct);
+    //app.post('/api/products', auth.isInRole('admin'), controllers.products.createProduct);
+    app.post('/api/products', controllers.products.createProduct);
     app.post('/api/products/:id', auth.isAuthenticated, controllers.purchases.createPurchase);
 
     //categories

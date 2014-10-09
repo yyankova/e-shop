@@ -1,15 +1,15 @@
 var Product = require('mongoose').model('Product'),
     fs = require('fs');
+
 //TODO: delete, update, find by id, load file in create/update product
 
 module.exports = {
     //TODO: validate data
-    createProduct: function (req, res, next) {
-        //var newProductData = req.body;
-        var fstream;
-        req.pipe(req.busboy);
+    createProduct: function (req, res) {
+        var fstream,
+            product = {};
 
-        var product = {};
+        req.pipe(req.busboy);
 
         req.busboy.on('file', function (fieldname, file, filename) {
             fstream = fs.createWriteStream(__dirname + '/../pictures/' + filename);
@@ -17,25 +17,34 @@ module.exports = {
             product.picture = filename;
         });
 
-        req.busboy.on('field', function (fieldname, val, fieldnameTruncated, valTruncated) {
+        req.busboy.on('field', function (fieldname, val) {
             product[fieldname] = val;
         });
 
         req.busboy.on('finish', function () {
+            var productToAdd = JSON.parse(product.product);
             Product.create({
-                    name: req.params.name,
-                    description: req.params.description,
-                    price: req.params.price,
-                    count: req.params.count,
-                    categories: req.params.categories},
-                function (err, product) {
+                    name: productToAdd.name,
+                    description: productToAdd.description,
+                    price: productToAdd.price || 0,
+                    count: productToAdd.count || 0,
+                    categories: productToAdd.categories},
+                function (err, addedProduct) {
                     if (err) {
                         console.log('Failed to create new product: ' + err);
                         return;
                     }
 
-                    //res.redirect('/customer');
-                    res.send(product);
+                    var extensionIndex = product.picture.lastIndexOf('.'),
+                        extension = product.picture.substring(extensionIndex);
+
+                    fs.rename(__dirname + '/../pictures/' + product.picture, __dirname + '/../pictures/' + addedProduct._id + extension, function (err, success) {
+                        addedProduct.picture = addedProduct._id + extension;
+                        addedProduct.save();
+
+                        res.status(201);
+                        res.send(addedProduct);
+                    });
                 });
         });
     },
