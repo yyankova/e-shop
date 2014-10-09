@@ -24,8 +24,8 @@ module.exports.seed = function() {
         }
 
         if (collection.length === 0) {
-            Purchase.create({user: 'user 1', paymentMethod: 'credit-card'});
-            Purchase.create({user: 'user 2', paymentMethod: 'cash'});
+            Purchase.create({user: 'me', paymentMethod: 'credit-card'});
+            Purchase.create({user: 'me', paymentMethod: 'cash'});
             console.log('Purchases seeded.');
         }
     });

@@ -19,7 +19,9 @@ module.exports = function (app){
     //app.post('/api/categories', auth.isInRole('admin'), controllers.categories.createCategory);
 
     //purchases
-    app.get('/api/user/purchases/', auth.isAuthenticated, controllers.purchases.getAllPurchasesForUser);
+    app.get('/api/purchases/', auth.isAuthenticated, controllers.purchases.getAllPurchasesForUser);
+    app.get('/api/purchases/:id', auth.isAuthenticated, controllers.purchases.getDetails);
+    app.post('/api/purchases/', auth.isAuthenticated, controllers.purchases.createPurchase);
 
     //reviews
 

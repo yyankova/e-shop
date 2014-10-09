@@ -41,11 +41,21 @@ app.config(function($routeProvider, $locationProvider) {
             controller: 'ProfileCtrl',
             resolve: routeUserChecks.authenticated
         })
+        .when('/purchases', {
+            templateUrl: '/partials/user-purchases',
+            controller: 'UserPurchasesListCtrl',
+            resolve: routeUserChecks.authenticated
+        })
+        .when('/purchases/:id', {
+            templateUrl: '/partials/purchase-details',
+            controller: 'PurchaseDetailsCtrl',
+            resolve: routeUserChecks.authenticated
+        })
         .when('/admin/users', {
             templateUrl: '/partials/users-list',
             controller: 'UserListCtrl',
             resolve: routeUserChecks.adminRole
-        })
+        });
 });
 
 app.run(function($rootScope, $location) {

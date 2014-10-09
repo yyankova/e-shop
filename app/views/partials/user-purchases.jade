@@ -1,0 +1,20 @@
+div(ng-repeat="purchase in purchases | orderBy: '-date'")
+    .row
+        .col-md-2
+            | {{ purchase.product }}
+        .col-md-2
+            | {{ purchase.purchaseDate }}
+        .col-md-2
+            | Paid
+            //if (purchase.paid == true)
+            //| Paid
+            //else
+            //| Not Paid
+        .col-md-2
+            | Shipped
+            //if (purchase.shipped == true)
+            //| Shipped
+            //else
+            //| Not Shipped
+        .col-md-4
+            a(href="#/purchases/{{ purchase._id }}") | Details

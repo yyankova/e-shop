@@ -79,6 +79,18 @@ module.exports = {
             res.json(collection);
         });
     },
+    getDetails: function(req, res){
+        var id = req.params.id;
+        Purchase.findOne({_id: req.params.id}).exec(function(req, obj){
+            if (err) {
+                console.log('Error while getting purchase: ' + err);
+                res.json(err);
+                return;
+            }
+
+            res.json(obj);
+        });
+    },
     update: function(req, res){
         // admin/:userId/purchases/:purchaseId
         var id = req.params['purchaseId'];
