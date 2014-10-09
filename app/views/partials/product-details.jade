@@ -1,14 +1,22 @@
 .container
-    .row
-        h2.col-md-4 {{ product.name }}
-        h2.col-md-2.big-text.pull-right.text-right Price: {{ product.price}}
-    .row
-        .panel.panel-primary
-            .panel-heading Description:
-            .panel-body {{product.description}}
-    .row
-        .panel.panel-primary
+    .col-lg-3
+        .row
+            .panel
+                img(src='/images/{{product.picture}}')
+    .col-lg-9
+        .row
+            h2.col-md-4 {{ product.name }}
+            h2.col-md-2.big-text.pull-right.text-right Price: {{ product.price}}
+        .row
+            .panel.panel-primary
+                .panel-heading Description:
+                .panel-body {{product.description}}
+        .row
+            .panel.panel-primary
             .panel-heading Categories
             .panel-body
                 ul.list-group
-                    li.list-group-item(ng-repeat="category in product.categories" ng-show="category.description") {{ category.description }}
+                    li.list-group-item(ng-repeat="category in product.categories") {{ category }}
+        .container
+            .row
+                button.btn.btn-primary(ng-click='buy(product._id)') Buy
