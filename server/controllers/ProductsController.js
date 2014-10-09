@@ -12,7 +12,7 @@ module.exports = {
         req.pipe(req.busboy);
 
         req.busboy.on('file', function (fieldname, file, filename) {
-            fstream = fs.createWriteStream(__dirname + '/../pictures/' + filename);
+            fstream = fs.createWriteStream(__dirname + '/../../app/images/' + filename);
             file.pipe(fstream);
             product.picture = filename;
         });
@@ -38,7 +38,7 @@ module.exports = {
                     var extensionIndex = product.picture.lastIndexOf('.'),
                         extension = product.picture.substring(extensionIndex);
 
-                    fs.rename(__dirname + '/../pictures/' + product.picture, __dirname + '/../pictures/' + addedProduct._id + extension, function (err, success) {
+                    fs.rename(__dirname + '/../../app/images/' + product.picture, __dirname + '/../../app/images/' + addedProduct._id + extension, function (err, success) {
                         addedProduct.picture = addedProduct._id + extension;
                         addedProduct.save();
 
