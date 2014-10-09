@@ -1,7 +1,6 @@
 'use strict';
 
 app.controller('PurchaseDetailsCtrl', function PurchaseDetailsCtrl($scope, $routeParams, notifier, purchasesData) {
-    $scope.leaveReview = leaveReview;
 
     purchasesData.getPurchaseDetails($routeParams.id)
         .then(function(data){
@@ -10,6 +9,7 @@ app.controller('PurchaseDetailsCtrl', function PurchaseDetailsCtrl($scope, $rout
             notifier.error(err.message);
         });
 
+    $scope.leaveReview = leaveReview;
     function leaveReview(){
 
     }
