@@ -1,10 +1,6 @@
 // TODO
 //product, purchase date, paid, payment method, payment details, ship date, shipped, product picture
 .container
-    .row
-        //(ng-show="{{purchase.shipped}}")
-        //button.btn.btn-primary('ng-click="leaveReview()"') Leave Review
-        button.btn.btn-primary Leave Review
     table.table
         tr
             th
@@ -20,3 +16,6 @@
                 | {{ currPurchase.purchaseDate | date: 'dd/MM/yyyy' }}
             td
                 | {{ currPurchase.paymentMethod }}
+    .container
+        .row(ng-show='currPurchase.shipped')
+            button(ng-click="leaveReview(currPurchase.productId)", class='btn btn-primary') Leave Review
