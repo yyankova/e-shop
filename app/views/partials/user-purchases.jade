@@ -1,20 +1,28 @@
-div(ng-repeat="purchase in purchases | orderBy: '-date'")
-    .row
-        .col-md-2
-            | {{ purchase.product }}
-        .col-md-2
-            | {{ purchase.purchaseDate }}
-        .col-md-2
-            | Paid
-            //if (purchase.paid == true)
-            //| Paid
-            //else
-            //| Not Paid
-        .col-md-2
-            | Shipped
-            //if (purchase.shipped == true)
-            //| Shipped
-            //else
-            //| Not Shipped
-        .col-md-4
-            a(href="#/purchases/{{ purchase._id }}") | Details
+.col-md-12
+    .panel.panel-info
+        .panel-heading.text-center My Purchases
+        .panel-heading
+            .col-md-2
+                | Product
+            .col-md-2
+                | Date
+            .col-md-2
+                | Paid
+            .col-md-2
+                | Shipped
+            .col-md-4
+                | Details
+        .panel-body
+            div(ng-repeat="purchase in purchases | orderBy: '-date'")
+                .row
+                    .col-md-2
+                        | {{ purchase.product }}
+                    .col-md-2
+                        | {{ purchase.purchaseDate | date: 'dd/MM/yyyy' }}
+                    .col-md-2
+                        | {{ purchase.paid ? 'Paid' : 'Not paid'}}
+                    .col-md-2
+                        | {{ purchase.shipped ? 'Shipped' : 'Not shipped'}}
+                    .col-md-4
+                        a(href="#/purchases/{{ purchase._id }}")
+                            | Details

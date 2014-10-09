@@ -22,10 +22,28 @@ module.exports.seed = function() {
             console.log('Cannot find products: ' + err);
             return;
         }
-
+//product, user, purchaseDate, paid, paymentMethod, paymentDetails, shipDate, shipped
         if (collection.length === 0) {
-            Purchase.create({user: 'me', paymentMethod: 'credit-card'});
-            Purchase.create({user: 'me', paymentMethod: 'cash'});
+            Purchase.create({
+                product: 'Jeans',
+                user: 'me',
+                purchaseDate: new Date(),
+                paid: false,
+                paymentMethod: 'creditCard',
+                paymentDetails: {cardNumber: '1234567890123'},
+                shipDate: new Date(),
+                shipped: false
+            });
+            Purchase.create({
+                product: 'Sweater',
+                user: 'me',
+                purchaseDate: new Date(),
+                paid: true,
+                paymentMethod: 'paymentOrder',
+                paymentDetails: {paymentOrderNumber: '1234567890123'},
+                shipDate: new Date(),
+                shipped: true
+            });
             console.log('Purchases seeded.');
         }
     });
