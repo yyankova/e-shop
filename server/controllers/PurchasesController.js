@@ -1,20 +1,51 @@
 var Purchase = require('mongoose').model('Purchase');
-//TODO: admin role to can: module.exports.Pay(id), module.exports.Ship(id),
-//TODO: get payment details depending on payment method
+//TODO: only admin role to can: module.exports.update()
+//TODO: add validation to payment details
+
+function isComposedOfDigits(cardNumber){
+    var isnum = /^\d+$/.test(cardNumber);
+    return isnum;
+}
+
+function validateCreditCard(cardNumber, securityCode){
+    return typeof(cardNumber) == 'string' &&
+        cardNumber.length == 12 &&
+        isComposedOfDigits(cardNumber);
+}
+
+function validatePaymentDetails(formBody){
+    var paymentMethod = formBody.paymentMethod;
+    if(paymentMethod === 'creditCard'){
+        var valid = validateCreditCard(formBody.cardNumber, formBody.securityCode);
+        if(!valid){
+            throw {message: 'Invalid card number and/or security code!'};
+        }
+    } else if (paymentMethod === 'paymentOrder') {
+        return {
+            code: formBody.paymentOrderNumber
+        };
+    } else {
+        // cash on delivery
+        return {
+
+        };
+    }
+}
 
 function paymentDetails(formBody){
     var paymentMethod = formBody.paymentMethod;
     if(paymentMethod === 'creditCard'){
         return {
-            //TODO
+            cardNumber: formBody.cardNumber
         };
-    } else if (paymentMethod === '') {
+    } else if (paymentMethod === 'paymentOrder') {
         return {
-            //TODO
+            code: formBody.paymentOrderNumber
         };
     } else {
+        // cash on delivery
         return {
-            //TODO
+
         };
     }
 };
@@ -25,14 +56,16 @@ module.exports = {
         newPurchaseData.purchaseDate = new Date();
         newPurchaseData.paid = false;
         newPurchaseData.shipped = false;
+        validatePaymentDetails(req.body);
         newPurchaseData.paymentDetails = getPaymentDetails(req.body);
         Purchase.create(newPurchaseData, function(err, purchase) {
             if (err) {
                 console.log('Failed to create new purchase: ' + err);
+                res.json(err);
                 return;
             }
 
-            res.send(purchase);
+            res.json(purchase);
         });
     },
     getAllPurchasesForUser: function(req, res) {
@@ -41,9 +74,24 @@ module.exports = {
         Purchase.find({user : username}).exec(function(err, collection) {
             if (err) {
                 console.log('Error while listing purchases: ' + err);
+                res.json(err);
+                return;
             }
 
-            res.send(collection);
-        })
+            res.json(collection);
+        });
+    },
+    update: function(req, res){
+        // admin/:userId/purchases/:purchaseId
+        var id = req.params['purchaseId'];
+        //req.body = {shipped: true} AND/OR {paid: true}
+        var update = req.body;
+        Purchase.findOneAndUpdate({_id: id}, {paid: true}).exec(function(err){
+            if (err) {
+                console.log('Error while updating purchase: ' + err);
+                res.json(err);
+                return;
+            }
+        });
     }
 }

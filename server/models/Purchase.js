@@ -1,8 +1,10 @@
 var mongoose = require('mongoose');
-//var productSchema = mongoose.model('Product').schema;
+var Schema = mongoose.Schema;
 
 var purchaseSchema = mongoose.Schema({
-    product: Object,
+    productId: {type: Schema.Types.ObjectId, ref: 'Product'},
+    product: String,
+    userId: {type: Schema.Types.ObjectId, ref: 'User'},
     user: String,
     purchaseDate: Date,
     paid: Boolean,

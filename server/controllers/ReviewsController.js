@@ -10,10 +10,11 @@ module.exports = {
         Review.create(newReviewData, function(err, review) {
             if (err) {
                 console.log('Failed to create new review: ' + err);
+                res.send(err);
                 return;
             }
 
-            res.send(review);
+            res.end(review);
         });
     },
     getAllReviewsForProduct: function(req, res) {
@@ -22,9 +23,11 @@ module.exports = {
         Purchase.find({productId : productId}).exec(function(err, collection) {
             if (err) {
                 console.log('Error while listing reviews: ' + err);
+                res.send(err);
+                return;
             }
 
-            res.send(collection);
+            res.json(collection);
         });
     },
     getAllReviewsFromUser: function(req, res) {
@@ -33,9 +36,11 @@ module.exports = {
         Purchase.find({userId : userId}).exec(function(err, collection) {
             if (err) {
                 console.log('Error while listing reviews: ' + err);
+                res.send(err);
+                return;
             }
 
-            res.send(collection);
+            res.json(collection);
         });
     },
     remove: function(req, res){
@@ -44,7 +49,11 @@ module.exports = {
         Purchase.findOneAndRemove({_id: id}).exec(function(err){
             if(err){
                 console.log('Error deleting review');
+                res.send(err);
+                return;
             }
+
+            res.end();
         });
     },
     update: function(req, res){
@@ -53,7 +62,11 @@ module.exports = {
         Purchase.findOneAndUpdate({_id: id}, req.body).exec(function(err){
             if(err){
                 console.log('Error deleting review');
+                res.send(err);
+                return;
             }
+
+            res.end();
         });
     }
 }
