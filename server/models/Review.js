@@ -1,7 +1,10 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var reviewSchema = mongoose.Schema({
-    product: String, //product id
+    productId: {type: Schema.Types.ObjectId, ref: 'Product'},
+    product: String,
+    userId: {type: Schema.Types.ObjectId, ref: 'User'},
     user: String,
     text: {type: String, maxLength: 300},
     date: Date
