@@ -23,6 +23,11 @@ app.config(function($routeProvider, $locationProvider) {
             templateUrl: '/partials/products-list',
             controller: 'ProductsListCtrl'
         })
+        .when('/products/create', {
+            templateUrl: '/partials/product-create',
+            controller: 'ProductCreateCtrl'
+            //resolve: routeUserChecks.adminRole
+        })
         .when('/products/:id', {
             templateUrl: '/partials/product-details',
             controller: 'ProductDetailsCtrl'
