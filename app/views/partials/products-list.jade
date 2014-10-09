@@ -23,7 +23,7 @@
             th Price
         tr(ng-repeat="product in products | filter: search | orderBy: sort")
             td
-                img(ng-src="/images/{{product.picture}}", width='150px', height='100px')
+                img(ng-src="/images/{{product.picture}}", height='150px', width='100px')
             td
                 a(href="#/products/{{ product._id }}") {{ product.name }}
             td {{ product.price }}

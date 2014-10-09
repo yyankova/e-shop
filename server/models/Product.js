@@ -1,4 +1,6 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    path = require('path'),
+    fs = require('fs');
 
 var productSchema = mongoose.Schema({
     categories: [String], //one product may be in several categories
@@ -18,56 +20,51 @@ module.exports.seed = function() {
             console.log('Cannot find products: ' + err);
             return;
         }
-
+        var imgDir = __dirname + '/../../images';
         if (collection.length === 0) {
             Product.create({
-                picture: '',
+                _id: '507f1f77bcf86cd799439011',
+                picture: '507f1f77bcf86cd799439011.jpg',
                 name: 'Black and white blazer',
                 description: 'Description some description',
                 price: 10.3,
                 count: 10,
                 categories: ['casual', 'sport']
-            }).then(function(product){
-                product.picture = __dirname + '/../../app/images/' + product._id + '.jpeg';
             });
             Product.create({
-                picture: '',
+                _id: '507f1f77bcf86cd799439012',
+                picture: '507f1f77bcf86cd799439012.jpg',
                 name: 'Skinny Jeans',
                 description: 'Description some description',
                 price: 10.3, count: 10,
                 categories: ['winter', 'sport']
-            }).then(function(product){
-                product.picture = __dirname + '/../../app/images/' + product._id + '.jpeg';
             });
             Product.create({
-                picture: '',
+                _id: '507f1f77bcf86cd799439013',
+                picture: '507f1f77bcf86cd799439013.jpg',
                 name: 'Ripped Jeans',
                 description: 'Description some description',
                 price: 10.7,
                 count: 10,
                 categories: ['summer', 'basic']
-            }).then(function(product){
-                product.picture = __dirname + '/../../app/images/' + product._id + '.jpeg';
             });
             Product.create({
-                picture: '',
+                _id: '507f1f77bcf86cd799439014',
+                picture: '507f1f77bcf86cd799439014.jpg',
                 name: 'White skirt',
                 description: 'Description some description',
                 price: 10.9,
                 count: 10,
                 categories: ['basic', 'casual']
-            }).then(function(product){
-                product.picture = __dirname + '/../../app/images/' + product._id + '.jpeg';
             });
             Product.create({
-                picture: '',
+                _id: '507f1f77bcf86cd799439015',
+                picture: '507f1f77bcf86cd799439015.jpg',
                 name: 'Skinny trousers',
                 description: 'None',
                 price: 10.3,
                 count: 10,
                 categories: ['winter']
-            }).then(function(product){
-                product.picture = __dirname + '/../../app/images/' + product._id + '.jpeg';
             });
             console.log('Products seeded.');
         }
