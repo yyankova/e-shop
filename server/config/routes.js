@@ -7,7 +7,9 @@ module.exports = function (app){
     app.get('/api/users', auth.isInRole('admin'), controllers.users.getAllUsers);
     app.post('/api/users', controllers.users.createUser);
     app.put('/api/users', auth.isAuthenticated, controllers.users.updateUser);
-    app.put('/api/users:id', controllers.users.deleteUser);
+
+    //admin
+    app.put('/api/users/:id', controllers.users.deleteUser);
 
     //products
     app.get('/api/products', controllers.products.getAllProducts);
