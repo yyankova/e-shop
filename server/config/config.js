@@ -8,8 +8,8 @@ module.exports = {
         port: 1234
     },
     production: {
-        //rootPath
-        //db:
-        //port:
+        rootPath: rootPath,
+        db: 'mongodb://admin:horae@ds033170.mongolab.com:33170/shopdb',
+        port: process.env.PORT
     }
 };
