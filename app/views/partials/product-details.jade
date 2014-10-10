@@ -17,6 +17,12 @@
             .panel-body
                 ul.list-group
                     li.list-group-item(ng-repeat="category in product.categories") {{ category }}
+        .row
+            .panel.panel-primary
+            .panel-heading Reviews
+            .panel-body
+                ul.list-group
+                    li.list-group-item(ng-repeat="review in reviews") By:{{ review.user }}, Date: {{review.date}}, Content: {{review.text}}
         .container
             .row
                 button.btn.btn-primary(ng-click='buy(product._id)') Buy
