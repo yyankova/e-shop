@@ -8,7 +8,7 @@ var purchaseSchema = mongoose.Schema({
     user: String,
     purchaseDate: Date,
     paid: Boolean,
-    paymentMethod: {type: String, required: true},
+    paymentMethod: {type: String},
     paymentDetails: {type: Object},
     shipDate: Date,
     shipped: Boolean

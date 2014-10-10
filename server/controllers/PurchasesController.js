@@ -17,25 +17,25 @@ function validatePaymentOrder(orderNumber){
 }
 
 function validatePaymentDetails(formBody, res){
-    var paymentMethod = formBody.paymentMethod;
-    if(paymentMethod === 'creditCard'){
-        var valid = validateCreditCard(formBody.cardNumber, formBody.securityCode);
-        if(!valid){
-            res.json({message: 'Invalid card number and/or security code!'});
-        }
-    } else if (paymentMethod === 'paymentOrder') {
-        var valid = validatePaymentOrder(formBody.paymentOrderNumber);
-        if(!valid){
-            res.json({message: 'Invalid payment order number!'});
-        }
-    }
+//    var paymentMethod = formBody.paymentMethod;
+//    if(paymentMethod === 'creditCard'){
+//        var valid = validateCreditCard(formBody.creditCardNumber, formBody.securityCode);
+//        if(!valid){
+//            res.json({message: 'Invalid card number and/or security code!'});
+//        }
+//    } else if (paymentMethod === 'paymentOrder') {
+//        var valid = validatePaymentOrder(formBody.paymentOrderNumber);
+//        if(!valid){
+//            res.json({message: 'Invalid payment order number!'});
+//        }
+//    }
 }
 
 function getPaymentDetails(formBody){
     var paymentMethod = formBody.paymentMethod;
     if(paymentMethod === 'creditCard'){
         return {
-            cardNumber: formBody.cardNumber
+            cardNumber: formBody.creditCardNumber
         };
     } else if (paymentMethod === 'paymentOrder') {
         return {
@@ -56,9 +56,11 @@ module.exports = {
         newPurchaseData.shipped = false;
         validatePaymentDetails(req.body, res);
         newPurchaseData.paymentDetails = getPaymentDetails(req.body);
+        newPurchaseData.user = req.user.username;
+        console.log(newPurchaseData);
         Purchase.create(newPurchaseData, function(err, purchase) {
             if (err) {
-                console.log('Failed to create new purchase: ' + err);
+                console.log('Error while creating purchase: ' + err);
                 res.json(err);
                 return;
             }

@@ -1,9 +1,8 @@
 'use strict';
 
-app.factory('purchasesData', ['$http', '$q', function tripsData($http, $q, authorization) {
+app.factory('purchasesData', ['$http', '$q', function tripsData($http, $q) {
     //TODO: fix baseServiceUrl
-    var baseServiceUrl = '';//http://localhost:1235';
-    var purchasesApi = baseServiceUrl + '/api/purchases';
+    var purchasesApi = '/api/purchases';
 
     return {
         getUserPurchases: function() {
@@ -36,7 +35,6 @@ app.factory('purchasesData', ['$http', '$q', function tripsData($http, $q, autho
         create: function(purchase){
             var deferred = $q.defer();
             var headers = {};
-            headers['Authorization'] = authorization.getAuthorizationHeader()['Authorization'];
             headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
             $http.post(purchasesApi,
@@ -45,7 +43,6 @@ app.factory('purchasesData', ['$http', '$q', function tripsData($http, $q, autho
                 .success(function(data) {
                     deferred.resolve(data);
                 }, function(response) {
-                    console.log('error in tripsData');
                     deferred.reject(response);
                 });
 
