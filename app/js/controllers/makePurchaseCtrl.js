@@ -6,8 +6,6 @@ app.controller('MakePurchaseController', function($scope, $routeParams, purchase
     function makePurchase(purchase){
         purchase.productId = $scope.productId;
 
-        console.log(purchase);
-
         purchasesData.create(purchase)
             .then(function(data){
                 notifier.success('Purchase made!');

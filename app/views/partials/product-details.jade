@@ -25,5 +25,5 @@
                     li.list-group-item(ng-repeat="review in reviews") By:{{ review.user }}, Date: {{review.date}}, Content: {{review.text}}
         .container
             .row
-                button.btn.btn-primary(ng-click='buy(product._id)') Buy
+                a.btn.btn-primary(href='#/products/{{product._id}}/purchase') Purchase
                 a.btn.btn-primary(href='#/products/{{ product._id }}/reviews') Add review
