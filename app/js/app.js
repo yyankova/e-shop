@@ -34,7 +34,8 @@ app.config(function($routeProvider, $locationProvider) {
         })
         .when('/products/:id/purchase', {
             templateUrl: '/partials/purchase-product',
-            controller: 'MakePurchaseController'
+            controller: 'MakePurchaseController',
+            resolve: routeUserChecks.authenticated
         })
         .when('/products/:id/reviews', {
             templateUrl: '/partials/add-review',

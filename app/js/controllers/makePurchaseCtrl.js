@@ -1,5 +1,5 @@
 'use strict'
-app.controller('MakePurchaseController', function($scope, $routeParams, purchasesData, notifier) {
+app.controller('MakePurchaseController', function($scope, $routeParams, $location, purchasesData, notifier) {
     $scope.productId = $routeParams.id;
     $scope.makePurchase = makePurchase;
 
@@ -9,6 +9,7 @@ app.controller('MakePurchaseController', function($scope, $routeParams, purchase
         purchasesData.create(purchase)
             .then(function(data){
                 notifier.success('Purchase made!');
+                $location.path('/products');
             }, function(err){
                 notifier.error(err.message);
             });
