@@ -32,6 +32,10 @@ app.config(function($routeProvider, $locationProvider) {
             templateUrl: '/partials/product-details',
             controller: 'ProductDetailsCtrl'
         })
+        .when('/products/:id/purchase', {
+            templateUrl: '/partials/purchase-product',
+            controller: 'MakePurchaseController'
+        })
         .when('/signup', {
             templateUrl: '/partials/signup',
             controller: 'SignUpCtrl'

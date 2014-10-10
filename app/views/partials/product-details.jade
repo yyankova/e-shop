@@ -19,4 +19,4 @@
                     li.list-group-item(ng-repeat="category in product.categories") {{ category }}
         .container
             .row
-                button.btn.btn-primary(ng-click='buy(product._id)') Buy
+                a.btn.btn-primary(href='#/products/{{product._id}}/purchase') Purchase
