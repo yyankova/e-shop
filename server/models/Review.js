@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var reviewSchema = mongoose.Schema({
     productId: {type: Schema.Types.ObjectId, ref: 'Product'},
-    product: String,
+    //product: String,
     userId: {type: Schema.Types.ObjectId, ref: 'User'},
     user: String,
     text: {type: String, maxLength: 300},

@@ -2,7 +2,7 @@ var auth = require('./auth'),
     controllers = require('../controllers');
 //TODO: not finished
 
-module.exports = function (app){
+module.exports = function (app) {
     //users
     app.get('/api/users', auth.isInRole('admin'), controllers.users.getAllUsers);
     app.post('/api/users', controllers.users.createUser);
@@ -17,6 +17,8 @@ module.exports = function (app){
     app.post('/api/products', auth.isInRole('admin'), controllers.products.createProduct);
     //app.post('/api/products', controllers.products.createProduct);
     app.post('/api/products/:id', auth.isAuthenticated, controllers.purchases.createPurchase);
+    app.post('/api/products/:id/reviews', auth.isAuthenticated, controllers.reviews.createReview);
+    app.get('/api/products/:id/reviews', controllers.reviews.getAllReviewsForProduct);
 
     //categories
     //app.get('/api/categories/', controllers.categories.getAllCategories);
@@ -30,18 +32,18 @@ module.exports = function (app){
     //reviews
 
     //partials
-    app.get('/partials/:partialName', function(req, res) {
+    app.get('/partials/:partialName', function (req, res) {
         res.render('../../app/views/partials/' + req.params.partialName)
     });
 
     app.post('/login', auth.login);
     app.post('/logout', auth.logout);
 
-    app.get('/api/*', function(req, res){
+    app.get('/api/*', function (req, res) {
         res.status(404);
         res.end();
     });
-    app.get('*', function(req, res) {
+    app.get('*', function (req, res) {
         res.render('index', {currentUser: req.user});
     });
 }
