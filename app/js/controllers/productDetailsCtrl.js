@@ -5,5 +5,11 @@ app.controller('ProductDetailsCtrl', function($scope, $routeParams, cachedProduc
                 $scope.product = product;
             }
         })
-    })
+    });
+
+    $scope.buy = buy;
+
+    function buy(productId){
+        console.log(productId);
+    };
 });

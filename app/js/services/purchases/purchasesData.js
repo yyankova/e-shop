@@ -2,7 +2,7 @@
 
 app.factory('purchasesData', ['$http', '$q', function tripsData($http, $q, authorization) {
     //TODO: fix baseServiceUrl
-    var baseServiceUrl = 'http://localhost:1235';
+    var baseServiceUrl = '';//http://localhost:1235';
     var purchasesApi = baseServiceUrl + '/api/purchases';
 
     return {
